@@ -17,6 +17,11 @@
 |**DEPLOY_HOST**|`example.ru`|Domain from the remote server|
 |**DEPLOY_PATH**|`/home/user/www/example.ru`|Path to project to sync with on the remote server.|
 
+## Warning
+*This script doesn't cleanup folder before deployment.*
+It means that if you change a name of a local file on the remote server you will get two files with the same name.
+Possible solution: deploy through git repo via `git pull` (for the future).
+
 ## Installation
 
 **1. Just download `deploy.sh` and `.env.example` to you project.**
@@ -28,3 +33,7 @@ cp .env.example .env
 
 **3. Change variables inside the `.env`**
 As described in env variables.
+
+
+## Ideas
+- [ ] Add ability to deploy via `git pull` on remote server. 
