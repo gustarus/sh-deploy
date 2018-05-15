@@ -1,4 +1,5 @@
 # Deployment script
+**Copy-and-paste** your staff to folder on remote server from local folder **without** `gitignore` files with `rsync` tool.
 
 ## Features
 - Deploy files through `rsync`.
