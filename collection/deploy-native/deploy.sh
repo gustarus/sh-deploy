@@ -11,7 +11,7 @@ export $(cat .env | xargs)
 localPath="$(pwd)"
 
 # project configuration
-projectName=${DEPLOY_NAME}
+projectName=${NAME}
 
 # target configuration
 targetUser=${DEPLOY_USER}
@@ -55,17 +55,5 @@ exe rsync -a --exclude-from=$pathToExcludeFIle ${localPath}/ ${targetUser}@${tar
 
 echo "\nDropping temporary file..."
 exe rm $pathToExcludeFIle
-
-echo "\nLoading container env variables locally..."
-exe set -a && . ./variables.env && set +a
-
-echo "\nUpping new containers..."
-remote "cd ${targetPath} && docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d"
-
-echo "\nRunning migrations inside the container..."
-remote "cd ${targetPath} && docker-compose run --rm php php yii migrate --interactive=0"
-
-echo "\nResetting web assets..."
-remote "cd ${targetPath} && rm -rf ./app/web/assets/*"
 
 echo "\nComplete!"
